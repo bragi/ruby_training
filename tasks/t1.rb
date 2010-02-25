@@ -65,7 +65,7 @@ class StringTest < Test::Unit::TestCase
     assert !"1234".valid_arabic?
     assert !"aaaa".valid_arabic?
     assert !"XXC".valid_arabic?
-    assert !"MCMXCIX".valid_roman?
+    assert !"MCMXCIIX".valid_roman?
     assert !"IIIII".valid_roman?
   end
   
