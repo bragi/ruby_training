@@ -21,7 +21,7 @@ class String
   include RomanConversion
 end
 
-class RomanNumbers
+class RomanNumerals
   def initialize(args)
     @number = args.first
   end
@@ -33,7 +33,7 @@ class RomanNumbers
 end
 
 #Make sure RomanNumbers#convert! ends the program with exit()
-RomanNumbers.new(ARGV).convert! unless ARGV.empty?
+RomanNumerals.new(ARGV).convert! unless ARGV.empty?
 
 require 'test/unit'
 
