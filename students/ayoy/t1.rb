@@ -32,6 +32,39 @@ module RomanConversion
 
     return result
   end
+
+  def to_roman
+    if !valid_arabic?
+      return
+    end
+
+    arabic_number = to_i_without_roman_conversion
+    if !(1...4000).include?(arabic_number)
+      return
+    end
+
+    numeral_values = {"M"=>1000, "D"=>500, "C"=>100, "L" => 50,
+                      "X"=>10, "V" => 5, "I"=>1}
+
+    roman_numeral = String.new
+    (to_s.size-1).downto(0) do |i|
+      unit = 10**i
+      digit = arabic_number/unit
+      if digit == 9
+        roman_numeral += numeral_values.index(unit) + numeral_values.index(10*unit)
+      elsif (5..8).include?(digit)
+        roman_numeral += numeral_values.index(5*unit) +
+                        numeral_values.index(unit)*(digit-5)
+      elsif digit == 4
+        roman_numeral += numeral_values.index(unit) + numeral_values.index(5*unit)
+      else
+        roman_numeral += numeral_values.index(unit) * digit
+      end
+      arabic_number -= digit * unit
+    end
+
+    return roman_numeral
+  end
 end
 
 class String
@@ -46,8 +79,20 @@ class RomanNumerals
   end
   
   def convert!
-    # TODO: implement properly
-    exit(0) # Finish gracefully by default, change if appropriate
+    if @number.valid_arabic?
+      @number = @number.to_roman
+    elsif @number.valid_roman?
+      @number = @number.to_i
+    else
+      exit(1)
+    end
+
+    if @number
+      puts @number
+      exit(0)
+    else
+      exit(1)
+    end
   end
 end
 
