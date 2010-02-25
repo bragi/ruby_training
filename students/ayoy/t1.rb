@@ -2,21 +2,42 @@
 
 module RomanConversion
   def valid_arabic?
-    self.size > 0 && self =~ /^[0-9]+$/
+    size > 0 && self =~ /^[0-9]+$/
   end
   
   def valid_roman?
-    self.size > 0 && self =~ /^M{0,3}(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,4})$/
+    size > 0 && self =~ /^M{0,3}(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,4})$/
   end
   
-  def to_i
-    # TODO: implement properly
-    super
+  def to_i_with_roman_conversion
+    if !valid_roman?
+      return to_i_without_roman_conversion
+    end
+
+    numeral_values = {"M"=>1000, "D"=>500, "C"=>100, "L" => 50,
+                      "X"=>10, "V" => 5, "I"=>1}
+
+    symbols = split(//)
+    result = 0
+    last_number = 0
+
+    (0...symbols.size).each do |i|
+      number = numeral_values[symbols[i]]
+      if (1...number).include?(last_number)
+        result -= 2*last_number
+      end
+      result += number
+      last_number = number
+    end
+
+    return result
   end
 end
 
 class String
   include RomanConversion
+  alias to_i_without_roman_conversion to_i
+  alias to_i to_i_with_roman_conversion
 end
 
 class RomanNumerals
