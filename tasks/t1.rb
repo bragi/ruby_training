@@ -11,14 +11,16 @@ module RomanConversion
     false
   end
   
-  def to_i
+  def to_i_with_roman_conversion
     # TODO: implement properly
-    super
+    to_i_without_roman_conversion
   end
 end
 
 class String
   include RomanConversion
+  alias to_i_without_roman_conversion to_i
+  alias to_i to_i_with_roman_conversion
 end
 
 class RomanNumerals
