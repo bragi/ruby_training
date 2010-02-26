@@ -19,9 +19,7 @@ module RomanConversion
     chars.inject(0) do |result, c|
       number = values[c]
       result -= 2 * last_number if last_number < number
-      result += number
-      last_number = number
-      result
+      (last_number, result = number, result + number).last
     end
   end
 end
