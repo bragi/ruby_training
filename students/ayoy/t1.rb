@@ -2,17 +2,15 @@
 
 module RomanConversion
   def valid_arabic?
-    size > 0 && self =~ /^[0-9]+$/
+    self =~ /^[0-9]+$/
   end
   
   def valid_roman?
-    size > 0 && self =~ /^M{0,3}(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,4})$/
+    self =~ /^M{0,3}(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,4})$/
   end
   
   def to_i_with_roman_conversion
-    if !valid_roman?
-      return to_i_without_roman_conversion
-    end
+    return to_i_without_roman_conversion unless valid_roman?
 
     numeral_values = {"M"=>1000, "D"=>500, "C"=>100, "L" => 50,
                       "X"=>10, "V" => 5, "I"=>1}
@@ -32,17 +30,11 @@ module RomanConversion
 
     return result
   end
+end
 
+class Integer
   def to_roman
-    if !valid_arabic?
-      return
-    end
-
-    arabic_number = to_i_without_roman_conversion
-    if !(1...4000).include?(arabic_number)
-      return
-    end
-
+    arabic_number = self
     numeral_values = {"M"=>1000, "D"=>500, "C"=>100, "L" => 50,
                       "X"=>10, "V" => 5, "I"=>1}
 
@@ -80,19 +72,20 @@ class RomanNumerals
   
   def convert!
     if @number.valid_arabic?
-      @number = @number.to_roman
+      if (1..4000).include?(@number.to_i)
+        puts @number.to_i.to_roman
+      else
+        puts "Number out of range for conversion to roman numeral"
+        exit(1)
+      end
     elsif @number.valid_roman?
-      @number = @number.to_i
+      puts @number.to_i
     else
+      puts "Give a positive integer or a roman numeral as an argument"
       exit(1)
     end
 
-    if @number
-      puts @number
-      exit(0)
-    else
-      exit(1)
-    end
+    exit(0)
   end
 end
 
