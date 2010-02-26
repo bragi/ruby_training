@@ -64,9 +64,9 @@ class StringTest < Test::Unit::TestCase
   end
   
   def test_check_invalid_roman
-    assert !"1234".valid_arabic?
-    assert !"aaaa".valid_arabic?
-    assert !"XXC".valid_arabic?
+    assert !"1234".valid_roman?
+    assert !"aaaa".valid_roman?
+    assert !"XXC".valid_roman?
     assert !"MCMXCIIX".valid_roman?
     assert !"IIIII".valid_roman?
   end
