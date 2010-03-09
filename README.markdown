@@ -6,7 +6,7 @@ driven development
 ## How to proceed
 
 1. Fork the repository
-1. Pick the tast to do (start with t0 and continue to harder ones)
+1. Pick the task to solve (start with t0 and continue to harder ones)
 1. Copy the task file to students/<your login>/
 1. Write a solution
 1. Send pull request
