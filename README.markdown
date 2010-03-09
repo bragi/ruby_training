@@ -3,7 +3,7 @@
 Set of simple Ruby tasks that guide through learning process of Ruby and test
 driven development
 
-## How to proceed
+## Students: How to start
 
 1. Fork the repository
 1. Pick the task to solve (start with t0 and continue to harder ones)
