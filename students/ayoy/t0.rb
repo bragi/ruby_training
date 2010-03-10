@@ -17,7 +17,7 @@ class Count
   
   # Creates a new Count instance with value set to value (defaults to 0)
   def initialize(value=0)
-    @val = value
+    reset(value)
   end
   
   # Increments value and returns new value
