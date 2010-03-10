@@ -17,27 +17,27 @@ class Count
   
   # Creates a new Count instance with value set to value (defaults to 0)
   def initialize(value=0)
-    # TODO: implement
+    @val = value
   end
   
   # Increments value and returns new value
   def increment
-    # TODO: implement
+    @val = @val + 1
   end
   
   # Decrements value and returns new value
   def decrement
-    # TODO: implement
+    @val = @val - 1
   end
   
   # Resets the value and returns new value
   def reset(value=0)
-    # TODO: implement
+    @val = value
   end
   
   # Returns value
   def value
-    # TODO: implement
+    @val
   end
 end
 
