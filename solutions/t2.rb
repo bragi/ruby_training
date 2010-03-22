@@ -23,13 +23,36 @@
 #     Squares: 1 4 9 16 25 36
 #     Sum of squares: 91
 
-class Squares
+class Array
+  def sum
+    inject {|sum, n| sum + n}
+  end
 end
 
-# Make sure RomanNumbers#convert! ends the program with exit()
-puts Squares.new(ARGV) and exit(0) unless ARGV.empty?
+class Squares
+  def initialize(numbers)
+    @numbers = numbers.map {|n| n.to_i}
+  end
+  
+  def sum
+    @numbers.sum
+  end
+  
+  def squares
+    @numbers.map {|n| n * n}
+  end
+  
+  def to_s
+    "Sum: #{sum}
+Squares: #{squares.join(" ")}
+Sum of squares: #{squares.sum}
+"
+  end
+end
 
-require 'unit/test'
+puts Squares.new(ARGV) or exit(0) unless ARGV.empty?
+
+require 'test/unit'
 
 class SquaresTest < Test::Unit::TestCase
   def test_create_accepts_single_item_array
@@ -38,5 +61,24 @@ class SquaresTest < Test::Unit::TestCase
 
   def test_create_accepts_multiple_items_array
     Squares.new(%w(1 2 3 4 5))
+  end
+  
+  def test_sum_returns_sum_of_array_items
+    assert_equal 15, Squares.new(%w(1 2 3 4 5)).sum
+  end
+  
+  def test_return_list_of_squares
+    assert_equal [1, 4, 9, 16, 25], Squares.new(%w(1 2 3 4 5)).squares
+  end
+  
+  def test_return_sum_of_squares
+    assert_equal 55, Squares.new(%w(1 2 3 4 5)).squares.sum
+  end
+  
+  def test_have_string_representation
+    assert_equal "Sum: 15
+Squares: 1 4 9 16 25
+Sum of squares: 55
+", Squares.new(%w(1 2 3 4 5)).to_s
   end
 end
