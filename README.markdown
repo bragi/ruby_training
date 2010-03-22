@@ -15,7 +15,7 @@ driven development
 
 If you want to improve the contents/fix bugs feel free to:
 
-1. Fort the repository
+1. Fork the repository
 1. Create a new branch
 1. Improve/fix files in tasks directory
 1. Send pull request
