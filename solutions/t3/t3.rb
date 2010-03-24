@@ -7,7 +7,7 @@
 #  * http://www.sinatrarb.com/
 #  * http://railsapi.com/doc/sinatra-v1.0/
 #
-# Simple labirynth game implemented as web application running at http://localhost:4567/
+# Simple labyrinth game implemented as web application running at http://localhost:4567/
 #
 # Starting on a home page it presents user with a short description of his 
 # locations and available paths he can take (as links).
