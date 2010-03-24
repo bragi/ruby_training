@@ -124,8 +124,6 @@ get "/" do
 end
 
 get "/node/:id" do
-  puts params[:id]
   node = Node.find(params[:id])
-  puts node
   NodeView.new(node).to_html
 end
