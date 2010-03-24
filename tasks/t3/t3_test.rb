@@ -1,3 +1,8 @@
+#!/usr/bin/env ruby -rubygems
+#
+# Install rack-test gem:
+#    gem install rack-test
+#
 require 't3'
 require 'test/unit'
 require 'rack/test'
