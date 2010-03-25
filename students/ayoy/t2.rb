@@ -25,30 +25,27 @@
 
 class Array
   def sum
-    inject(0) do |result, i|
-      result += i.to_i
-    end
+    inject(0) { |result, i| result += i }
   end
 end
 
 class Squares
   def initialize(args)
-    @array = Array.new(args)
+    @array = args.map { |x| x.to_i }
   end
 
   def to_s
-    out = ''
-    out << "Sum: #{sum.to_s}\n"
-    out << "Squares: #{squares.join(' ')}\n"
-    out << "Sum of squares: #{squares.sum.to_s}\n"
+    out = "Sum: #{sum.to_s}
+Squares: #{squares.join(' ')}
+Sum of squares: #{squares.sum}\n"
   end
 
   def sum
-    return @array.sum
+    @array.sum
   end
   
   def squares
-    @array.map { |x| x.to_i**2 }
+    @array.map { |x| x**2 }
   end
 end
 
