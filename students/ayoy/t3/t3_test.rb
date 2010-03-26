@@ -1,4 +1,4 @@
-#!/usr/bin/env ruby -rubygems
+#!/usr/bin/env ruby
 #
 # Install rack-test gem:
 #    gem install rack-test
