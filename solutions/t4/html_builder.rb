@@ -24,15 +24,11 @@ class HtmlBuilder
     @tags << tag
   end
   
-  def html(&block)
-    tag("html", &block)
-  end
-
-  def p(text=nil, &block)
-    tag("p", text, &block)
-  end
-
-  def strong(&block)
-    tag("strong", &block)
+  %w(body h1 head html p strong title).each do |t|
+    eval <<-METHOD
+      def #{t}(text=nil, &block)
+        tag("#{t}", text, &block)
+      end
+METHOD
   end
 end

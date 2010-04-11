@@ -46,5 +46,21 @@ describe HtmlBuilder do
       end
       @builder.to_s.should == "<p>This <strong>is in bold</strong>!</p>"
     end
+
+    it "has representation for full size example" do
+      @builder.html do |html|
+        html.head do |head|
+          head.title "Hello World!"
+        end
+        html.body do |body|
+          body.h1 "Hello World!"
+          body.p do |p|
+            p.text "Hello "
+            p.strong "Everyone"
+            p.text "!"
+          end
+        end
+      end
+    end
   end
 end  
