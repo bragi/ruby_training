@@ -17,17 +17,22 @@ class HtmlBuilder
     @tags << text
   end
   
-  def tag(name)
+  def tag(name, text=nil)
     tag = HtmlBuilder.new(name)
+    tag.text text if text
     yield tag if block_given?
     @tags << tag
   end
   
-  def p(&block)
-    tag("p", &block)
-  end
-
   def html(&block)
     tag("html", &block)
+  end
+
+  def p(text=nil, &block)
+    tag("p", text, &block)
+  end
+
+  def strong(&block)
+    tag("strong", &block)
   end
 end

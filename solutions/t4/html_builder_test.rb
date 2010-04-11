@@ -7,32 +7,44 @@ describe HtmlBuilder do
     @builder = HtmlBuilder.new
   end
   
-  it "has empty default representation" do
-    @builder.to_s.should == ""
-  end
-  
-  it "has representation of a single tag" do
-    @builder.p
-    @builder.to_s.should == "<p></p>"
-  end
-  
-  it "has representation of nested tags" do
-    @builder.html do |html|
-      html.p
+  context "when presented as string" do
+    it "is an empty string" do
+      @builder.to_s.should == ""
     end
-    @builder.to_s.should == "<html><p></p></html>"
-  end
-  
-  it "has text content" do
-    @builder.p do |p|
-      p.text "Some text"
+
+    it "is a single tag" do
+      @builder.p
+      @builder.to_s.should == "<p></p>"
     end
-    @builder.to_s.should == "<p>Some text</p>"
-  end
-  
-  it "has representation for full size example" do
-    @builder.html do |html|
-      
+
+    it "has nested tags" do
+      @builder.html do |html|
+        html.p
+      end
+      @builder.to_s.should == "<html><p></p></html>"
+    end
+
+    it "has text content" do
+      @builder.p do |p|
+        p.text "Some text"
+      end
+      @builder.to_s.should == "<p>Some text</p>"
+    end
+    
+    it "has text shorthand" do
+      @builder.p "Some text"
+      @builder.to_s.should == "<p>Some text</p>"
+    end
+
+    it "nests tags and text" do
+      @builder.p do |p|
+        p.text "This "
+        p.strong do |strong|
+          strong.text "is in bold"
+        end
+        p.text "!"
+      end
+      @builder.to_s.should == "<p>This <strong>is in bold</strong>!</p>"
     end
   end
 end  
