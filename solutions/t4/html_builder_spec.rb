@@ -1,4 +1,16 @@
 #!/usr/bin/env spec
+
+# Uses Behaviour Driven Development via RSpec (http://rspec.info/)
+#
+# Install RSpec using:
+#   gem install rspec
+#
+# Run examples within this file:
+#   spec html_builder_spec.rb
+#
+# To list all examples run via:
+#   spec -f specdoc html_builder_spec.rb
+
 require 'html_builder'
 require 'spec'
 

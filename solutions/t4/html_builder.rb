@@ -1,5 +1,20 @@
-# Allows to generate HTML using a nice Ruby syntax. Takes care of whitespace,
-# closing the tags properly and quoting attributes.
+# Allows to generate HTML using a nice Ruby syntax. Takes care of closing the
+# tags properly.
+#
+# Example usage:
+#
+#    html = HtmlBuilder.new("html")
+#    html.head do |html|
+#      head.title "Hello World!"
+#    end
+#    html.body do |body|
+#      body.h1 "Hello World!"
+#      body.p do |p|
+#        p.text "Hello "
+#        p.strong "everybody"
+#        p.text "!"
+#      end
+#    end
 class HtmlBuilder
   def initialize(name=nil)
     @name = name
