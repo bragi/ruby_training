@@ -1,0 +1,56 @@
+#!/usr/bin/env ruby
+
+require 'uploadable'
+
+Uploadable.connect(
+  :host => 'couchdb.kazjote.eu',
+  :database => 'kazjote',
+  :user => 'replikator',
+  :password => 'replikator'
+)
+
+class Note
+  include Uploadable::InstanceMethods
+  extend Uploadable::ClassMethods
+
+  attr_accessor :name, :content
+
+  uploadable :id => :name, :attributes => [:content]
+
+  def initialize(name = nil, content = nil)
+    self.name = name
+    self.content = content
+  end
+
+  def self.add(name, content)
+    note = new(name, content)
+    note.upload
+  end
+
+  def self.view(name)
+    download(name)
+  end
+end
+
+def exit_with_usage
+  puts USAGE_INFO
+  exit 1
+end
+
+USAGE_INFO = <<-end_usage
+Usage: notes view <name>
+             add <name>
+end_usage
+
+exit_with_usage unless ARGV.length == 2
+
+case ARGV[0]
+when 'add'
+  content = $stdin.read
+  Note.add(ARGV[1], content)
+when 'view'
+  puts Note.view(ARGV[1]).content
+else
+  exit_with_usage
+end
+
